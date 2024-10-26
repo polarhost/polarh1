@@ -47,4 +47,4 @@ async def stop_sending(interaction: discord.Interaction):
     send_random = False  # Stop sending messages
     await interaction.response.send_message("Stopped sending random 0 or 1 messages.")
 
-bot.run(os.env.TOKEN)
+bot.run(os.getenv("TOKEN"))
