@@ -10,6 +10,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 # Global variable to store the target channel ID and control the message loop
 target_channel_id = None
 send_random = False
+random_string = ""  # To store the random string
 
 @bot.event
 async def on_ready():
@@ -34,12 +35,17 @@ async def set_channel(interaction: discord.Interaction, channel: discord.TextCha
     await start_sending_random()
 
 async def start_sending_random():
-    global send_random
+    global send_random, random_string
     while send_random:
+        # Append a random 0 or 1 to the string
+        random_string += str(random.choice([0, 1]))
+
+        # Send the updated string to the target channel
         channel = bot.get_channel(target_channel_id)
         if channel:
-            await channel.send(str(random.choice([0, 1])))
-        await asyncio.sleep(1)  # 1-second cooldown between messages
+            await channel.send(random_string)
+
+        await asyncio.sleep(1)  # 1-second delay before appending the next number
 
 @bot.tree.command(name="stop", description="Stop sending random 0 or 1 messages")
 async def stop_sending(interaction: discord.Interaction):
