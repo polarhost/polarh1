@@ -2,6 +2,7 @@ import discord
 import random
 import asyncio
 from discord.ext import commands
+import os
 
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix="!", intents=intents)
@@ -46,4 +47,4 @@ async def stop_sending(interaction: discord.Interaction):
     send_random = False  # Stop sending messages
     await interaction.response.send_message("Stopped sending random 0 or 1 messages.")
 
-bot.run(TOKEN)
+bot.run(os.env.TOKEN)
