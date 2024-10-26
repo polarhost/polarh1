@@ -6,7 +6,7 @@ import os
 from keep_alive import keep_alive
 
 intents = discord.Intents.default()
-intents = message_content = True
+intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Global variable to store the target channel ID and control the message loop
